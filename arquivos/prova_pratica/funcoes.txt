@@ -1,0 +1,31 @@
+===============================================================================
+atividade.r:
+
+lm() = regressão linear
+summary() = sumário de alguma coisa
+plot() = plota alguma coisa
+influence.measures() = verifica se/quais pontos influentes.
+shapiro.test() = testar normalidade
+
+===============================================================================
+Borboletas.r:
+
+shapiro.test()  = teste de normalidade
+bartlett.test() = teste de homocedasticidade
+aov() = anova   = teste de diferenças de médias de 3 ou mais grupos.
+TukeyHSD()      = teste para identificar quais grupos diferem de quais, e quanto.
+kruskal.test()    = alternativa não paramétrica para a anova
+dunnTest()        = versão TukeyHSD para kruskall-wallis
+boxplot()       = boxplot
+
+===============================================================================
+membros.r:
+
+chisq.test() = teste qui-quadrado de independência (Não cai na prova)
+
+===============================================================================
+notas.r:
+
+cor.test(): Correlação (pearson/spearman)
+
+===============================================================================

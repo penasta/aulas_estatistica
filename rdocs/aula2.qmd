@@ -1,0 +1,711 @@
+---
+title: "Aula 2"
+author:
+  - name: Bruno Gondim Toledo
+    affiliation: 
+      - name: Estatístico — CONRE 1ª Região Nº 11477
+    url: https://github.com/penasta
+format:
+  revealjs: 
+    width: 1600
+    height: 900
+    slide-number: true
+    chalkboard: 
+      buttons: true
+    preview-links: auto
+    scrollable: true
+    theme: serif
+    css: styles.css
+resources:
+  - demo.pdf
+editor_options: 
+  chunk_output_type: console
+knitr:
+  opts_chunk:
+    dev: png
+    dev.args:
+      bg: transparent
+---
+
+## Temas do dia
+
+::: incremental
+
+- Correlação de Pearson;
+
+- Correlação de Spearman;
+
+- Regressão linear simples;
+
+- ANOVA;
+
+- Kruskal-Wallis;
+
+- GLM - Modelos Lineares Generalizados.
+
+:::
+
+## Relembrando...
+
+::: fragment
+
+Na aula anterior, trabalhamos com os testes Qui quadrado de independência e Qui quadrado de aderência.
+
+:::
+
+::: fragment
+
+Em ambos os casos, tínhamos testes para trabalhar com variáveis **categóricas**. Hoje, veremos os testes para trabalhar com variáveis **numéricas**.
+
+:::
+
+::: fragment
+
+Nestes casos, usaremos técnicas como correlação, regressão, ANOVA, GLM e Kruskal-Wallis!
+
+:::
+
+## Correlação (linear) (de Pearson)
+
+::: {style="font-size: 68%;"}
+
+::: fragment
+
+Esta é uma técnica **paramétrica**. Iremos calcular a correlação linear de Pearson no caso em que estamos comparando duas variáveis quantitativas (contínuas).
+
+:::
+
+::: fragment
+
+Esta métrica serve para a avaliar a relação **linear** entre **duas** variáveis.
+
+:::
+
+::: fragment
+
+Existe um pressuposto de normalidade na técnica (dados devem ser aproximadamente normais).
+
+:::
+
+::: fragment
+
+Pode ser sensível a valores *outliers* extremos.
+
+:::
+
+::: fragment
+
+Interpretação:
+
+::: incremental
+
+- $\rho \approx 0$: sem relação (ou relação muito fraca);
+
+- $\rho>0 \rightarrow$ relação positiva;
+
+- $\rho<0 \rightarrow$ relação negativa;
+
+- $\rho \approx 1$ ou $\rho \approx -1$: relação forte.
+
+:::
+
+:::
+
+::: fragment
+
+Exemplo 1) Como saber se existe relação linear entre massa corporal e comprimento do fêmur?
+
+:::
+
+::: fragment
+
+Resposta: Para responder a pergunta, a técnica que devemos usar é a correlação linear de Pearson!
+
+:::
+
+::: fragment
+
+Exemplo 2) Se, para altura da espécie e o comprimento da folha, observou-se o valor  $\rho = 0,7$, o que pode-se dizer sobre estas variáveis?
+
+:::
+
+::: fragment
+
+Resposta: Existe correlação linear positiva entre as variáveis altura e comprimento da folha, e esta é moderada para forte!
+
+:::
+
+::: fragment
+
+Isto é, se existem duas variáveis numéricas (aproximadamente normais), e queremos saber se elas aumentam ou diminuem juntas, usamos correlação linear de Pearson.
+
+:::
+
+:::
+
+## Correlação (não linear) de Spearman
+
+::: {style="font-size: 85%;"}
+
+OBS: Técnica **não paramétrica**. Iremos utilizar a correlação de Spearman quando:
+
+::: fragment
+
+Temos duas variáveis numéricas, porém:
+
+::: incremental
+
+- Não são normais;
+
+- Existem **outliers**;
+
+- Relação **monotônica**, mas não linear
+
+:::
+
+:::
+
+::: fragment
+
+OU, ainda:
+
+- Quando temos variáveis categóricas **ordinais**
+
+:::
+
+::: fragment
+
+Interpretação do valor da correlação de Spearman:
+
+- Igual a da correlação de Pearson!
+
+:::
+
+::: fragment
+
+Exemplo 1) Impacto da Idade na Pressão Arterial
+
+:::
+
+::: fragment
+
+Exemplo 2) qualidade da água (baixa, média, alta) vs contagem do número de indivíduos de uma determinada espécie de peixe (contagem)
+
+:::
+
+:::
+
+## Regressão Linear Simples
+
+::: fragment
+
+Objetivo desta técnica **paramétrica**:
+Modelar uma variável **resposta** (**Y**) (contínua) como **função** de uma variável **explicativa** (**X**) (contínua)
+
+:::
+
+::: fragment
+
+Pergunta desta técnica:
+Como e quanto Y muda quando X muda?
+
+:::
+
+::: fragment
+
+Hipóteses:
+
+$H_0)$ X não explica Y | Isto é, $\beta_1=0$
+
+$H_1$ $\beta_1 \neq 0$
+
+:::
+
+::: fragment
+
+Interpretação:
+
+- $\beta_1 > 0 \rightarrow$ inclinação positiva (Y aumenta quando X aumenta);
+
+- $\beta_1 < 0 \rightarrow$ inclinação negativa (Y diminui quando X aumenta);
+
+:::
+
+::: fragment
+
+Quando usar regressão, e não correlação?
+
+:::
+
+::: fragment
+
+Quando queremos **prever** Y a partir de X, ou entender o **efeito** de X sobre Y.
+
+:::
+
+::: fragment
+
+OBS: Não existe garantia de causa-efeito aqui (o sol nasce porque o galo canta?)
+
+:::
+
+## Exercício regressão linear simples
+
+::: fragment
+
+Exemplo) Ajustou-se um modelo de regressão linear simples, onde buscou-se metrificar o efeito da quantidade de adubo no crescimento de uma determinada espécie de planta. Observou-se o valor $\beta_1 = 2,5$. A escala da variável quantidade de adubo está em gramas, e da variável altura da planta está em centímetros. O **p-valor** de $\beta_1$ é 0,03.
+
+:::
+
+::: {style="font-size: 68%;"}
+
+::: fragment
+
+Pergunta 1) Existe correlação linear entre as variáveis? Se sim, ela é positiva ou negativa?
+
+:::
+
+::: fragment
+
+Resposta: Sim, positiva.
+
+:::
+
+::: fragment
+
+Pergunta 2) O coeficiente $\beta_1$ é significativo a $\alpha = 0,05$? E a $\alpha = 0,01$?
+
+:::
+
+::: fragment
+
+Resposta: É significativo a 5%, **NÃO** é significativo a 1%.
+
+:::
+
+::: fragment
+
+Pergunta 3) Qual é a interpretação do valor de $\beta_1$?
+
+:::
+
+::: fragment
+
+Resposta: Em média, para cada 1g de adubo adicionado, haverá um efeito de crescimento de 2,5 cm na altura da planta
+
+:::
+
+
+::: fragment
+
+Pergunta 4) Quais os pressupostos desta técnica?
+
+:::
+
+::: fragment
+
+Resposta:
+
+::: incremental
+
+- Independência (dos erros) (das observações);
+
+- Normalidade (dos erros);
+
+- Homocedasticidade (Variância constante);
+
+- Linearidade
+
+:::
+
+:::
+
+:::
+
+## ANOVA
+
+Análise de variância (ANOVA) é uma técnica **paramétrica**. Utilizaremos esta técnica quando queremos comparar, **simultaneamente**, a **média** de **3 ou mais grupos**
+
+::: fragment
+
+Pressupostos:
+
+::: incremental
+
+- Normalidade;
+- Homocedasticidade;
+- Independência.
+
+:::
+
+:::
+
+::: fragment
+
+Hipóteses:
+
+- $H_0$: todas as médias são iguais;
+
+- $H_1$: pelo menos uma média difere.
+
+:::
+
+
+::: fragment
+
+Exemplo: comparar altura média de plantas sob 3 tipos de adubação.
+
+:::
+
+## Kruskal–Wallis
+
+::: fragment
+
+É a versão **não paramétrica** da ANOVA.
+
+:::
+
+::: fragment
+
+Quando usar?
+
+::: incremental
+
+- Dados não normais;
+
+- Variâncias muito diferentes;
+
+- Variável ordinal.
+
+:::
+
+:::
+
+::: fragment
+
+Hipóteses:
+
+- $H_0$: distribuições iguais;
+
+- $H_1$: pelo menos um grupo difere.
+
+:::
+
+## GLM — Modelos Lineares Generalizados
+
+::: {style="font-size: 90%;"}
+
+::: fragment
+
+Esta é uma técnica **paramétrica**. Podemos usar esta técnica quando, por exemplo, Y não é normal, OU quando o pressuposto de homocedasticidade não é atendido para a regressão linear.
+
+:::
+
+::: fragment
+
+Neste caso, utilizaremos outras **famílias** de distribuições, que não a distribuição normal.
+
+Distribuições comuns:
+
+::: incremental
+
+- **Poisson** → contagens;
+
+- **Binomial** → proporções / 0–1;
+
+- **Gama** → variáveis positivas e assimétricas.
+
+:::
+
+:::
+
+::: fragment
+
+Estrutura:
+
+- Escolha da distribuição;
+
+- Escolha da ligação (log, logit, identidade).
+
+:::
+
+::: fragment
+
+Exemplo: modelar número de insetos (contagem) em função da temperatura $\rightarrow$ GLM Poisson.
+
+:::
+
+:::
+
+## Possíveis questões de prova 1
+
+::: fragment
+
+1) Sobre o teste Qui-quadrado de independência, assinale C (certo) ou E (errado):
+
+1.1) ( ) É utilizado para comparar duas variáveis numéricas e verificar se são independentes.
+
+1.2) ( ) As frequências esperadas devem ser suficientemente grandes para que o teste seja válido.
+
+1.3) ( ) O teste assume normalidade dos dados.
+
+1.4) ( ) Em uma tabela 2×2, o teste avalia se a proporção das categorias é igual entre os grupos.
+
+1.5) ( ) O teste é indicado para investigar associações entre duas variáveis categóricas.
+
+:::
+
+::: fragment
+gabarito:
+
+1.1) E: Qui-quadrado é para variáveis categóricas, não numéricas.
+
+1.2) C: regra prática típica: esperados ≳ 5 (ou usar correções/exato de Fisher se não).
+
+1.3) E: não exige normalidade das variáveis — trabalha com contagens/frequências.
+
+1.4) C: em termos práticos, testa se as proporções são independentes entre linhas/colunas.
+
+1.5) C: definição do teste.
+
+:::
+
+## Possíveis questões de prova 2
+
+::: fragment
+
+Uma população de borboletas apresenta proporções teóricas de cores:
+
+- 50% amarelas
+
+- 25% brancas
+
+- 25% azuis
+
+Os pesquisadores coletaram 120 indivíduos, resultando em:
+
+- 70 amarelas
+
+- 25 brancas
+
+- 25 azuis
+
+Qual teste deve ser utilizado para avaliar se a distribuição observada segue o padrão esperado?
+
+:::
+
+::: fragment
+gabarito:
+
+Teste Qui-quadrado de aderência.
+
+Hipóteses:
+
+$H_0$: as frequências observadas seguem as proporções teóricas (50%, 25%, 25%).
+
+$H_1$: as frequências observadas não seguem as proporções teóricas.
+
+temos uma variável categórica (cor) e queremos comparar observadas vs esperadas.
+(Observados: 70,25,25; Esperados: 120×(0.5,0.25,0.25) = 60,30,30).
+
+:::
+
+## Possíveis questões de prova 3
+
+Um estudo avalia se há associação entre a espécie de planta (A ou B) e a presença de um fungo (sim/não).
+
+```
+           | Fungo Sim | Fungo Não
+-----------|-----------|-----------
+Planta A   |     18    |      32
+Planta B   |     25    |      25
+
+```
+
+a) Qual teste estatístico deve ser utilizado?
+b) Qual é a hipótese nula do teste?
+c) Se o p-valor encontrado for 0,03, qual seria a conclusão biológica?
+
+::: fragment
+gabarito:
+
+a) Teste: Qui-quadrado de independência (tabela 2×2).
+
+b) Hipótese nula: $H_0)$ = espécie da planta e presença do fungo são independentes (sem associação).
+
+c) Conclusão com p = 0,03: rejeita-se $H_0)$ ao nível 0,05 $\rightarrow$ existe evidência de associação entre espécie e presença de fungo.
+
+Interpretação biológica: a presença do fungo difere entre Planta A e Planta B (por exemplo, proporções: Planta A 18/50 = 36%; Planta B 25/50 = 50% $\rightarrow$ Planta B parece ter maior prevalência).
+
+:::
+
+## Possíveis questões de prova 4
+
+Assinale a alternativa correta.
+
+Para estudar se há relação entre o comprimento do bico e a massa corporal em aves, que são variáveis aproximadamente normais, o teste mais adequado é:
+
+a) Qui-quadrado de independência
+b) Correlação de Pearson
+c) Correlação de Spearman
+d) Regressão Poisson
+e) Teste t pareado
+
+::: fragment
+gabarito:
+
+b) Correlação de Pearson.
+
+duas variáveis contínuas e aproximadamente normais $\rightarrow$ Pearson.
+
+:::
+
+## Possíveis questões de prova 5
+
+Em uma análise de impacto ambiental, os pesquisadores registraram:
+
+Nível de poluição da água: baixo, médio, alto
+
+Número de indivíduos de um peixe sensível (contagem)
+
+Qual técnica deve ser utilizada para avaliar se há relação entre a qualidade da água e a abundância da espécie?
+Justifique com base no tipo das variáveis.
+
+::: fragment
+gabarito:
+
+Correlação de Spearman.
+
+Qualidade da água é ordinal (baixo/médio/alto) e a abundância é contagem; Spearman funciona com ordinais ou quando a relação é monotônica (ou quando há não-normalidade).
+
+(Alternativa plausível: se quiser modelar contagens ajustando covariáveis, usar GLM Poisson; mas para verificar associação simples, Spearman é adequado).
+
+:::
+
+## Possíveis questões de prova 6
+
+Foi encontrada correlação de $\rho = -0,82$ entre o pH da água e a concentração de amônia.
+
+a) A relação é positiva ou negativa?
+b) É fraca, moderada ou forte?
+c) O que isso significa biologicamente?
+
+::: fragment
+gabarito:
+
+a) Relação: negativa.
+b) Forte
+c) Significado biológico: conforme o pH aumenta, a concentração de amônia tende a diminuir; existe uma relação monotônica negativa forte entre as duas variáveis (se estatisticamente significativa, indica associação consistente).
+
+:::
+
+## Possíveis questões de prova 7
+
+Na regressão linear simples $Y \sim X$:
+
+a) Qual é a hipótese nula para o coeficiente $\beta_1$?
+b) O que significa encontrar $\beta_1$ > 0?
+c) Quando preferimos regressão e não correlação?
+
+::: fragment
+gabarito:
+
+a) Hipótese nula: $H_0) \beta_1 = 0$ (X não explica Y). 
+
+b) $\beta_1 > 0$ significa: aumento em X está associado a aumento médio esperado em Y (inclinação positiva).
+
+c) Quando preferir regressão a correlação: quando queremos prever Y a partir de X ou estimar o efeito/coeficiente (quantificar mudança em Y por unidade de X), não apenas medir associação.
+
+:::
+
+## Possíveis questões de prova 8
+
+Um modelo de regressão encontrou:
+
+$Y = 2,1 + 0,45X$; P-valor de $\beta_1$ = 0,004
+
+Interprete o resultado.
+
+::: fragment
+gabarito:
+
+O coeficiente $\beta_1 = 0,45$ é estatisticamente significativo (p-valor = 0,004 < 0,05). Em média, para cada aumento de 1 unidade em X, Y aumenta 0,45 unidades. O intercepto 2,1 é a predição de Y quando X = 0 (interpretação prática depende do contexto).
+
+:::
+
+## Possíveis questões de prova 9
+
+Um pesquisador mediu a altura de plantas sob três tratamentos de fertilizante: A, B e C.
+
+Os dados são normais, com variâncias iguais entre os grupos.
+
+a) Qual teste deve ser usado, e por quê?
+
+::: fragment
+gabarito:
+
+ANOVA, é o teste paramétrico mais poderoso. Poderia utilizar Kruskall-Wallis também, mas como são atendidos os pressupostos de normalidade e homocedasticidade, o correto é optar pelo teste mais poderoso!
+:::
+
+## Possíveis questões de prova 10
+
+O número de insetos observados em 4 áreas diferentes apresenta forte assimetria e variâncias desiguais.
+
+Qual teste deve ser aplicado?
+O que significa rejeitar $H_0)$ nesse teste?
+
+::: fragment
+gabarito:
+
+Kruskal–Wallis.
+Significado de rejeitar $H_0$: pelo menos um dos grupos difere (OBS: Normalmente procede-se com testes post-hoc para identificar quais grupos diferem).
+
+:::
+
+## Possíveis questões de prova 11
+
+Associe o tipo de variável resposta ao modelo GLM correspondente:
+
+Número de flores por planta
+
+Sobrevivência (0/1)
+
+Taxa metabólica (valores positivos, assimétrica)
+
+a) Distribuição binomial
+b) Distribuição Gama
+c) Distribuição Poisson
+
+::: fragment
+gabarito:
+
+Número de flores por planta $\rightarrow$ c) Poisson
+
+Sobrevivência (0/1) $\rightarrow$ a) Binomial
+
+Taxa metabólica (positiva, assimétrica) $\rightarrow$ b) Gama
+
+:::
+
+## Possíveis questões de prova 12
+
+Para modelar o número de larvas (contagem) em função da temperatura, o modelo adequado é:
+
+a) Regressão linear simples
+b) ANOVA
+c) GLM Poisson
+d) GLM Binomial
+e) Qui-quadrado de independência
+
+::: fragment
+gabarito:
+
+c) GLM Poisson.
+
+Número de larvas é uma contagem, modelo natural é Poisson.
+
+:::
+
+## Encerramento
+
+Perguntas? Feedbacks?

@@ -1,0 +1,321 @@
+---
+title: "Aula experimental"
+author:
+  - name: Bruno Gondim Toledo
+    affiliation: 
+      - name: Estatístico — CONRE 1ª Região Nº 11477
+    url: https://github.com/penasta
+format:
+  revealjs: 
+    width: 1600
+    height: 900
+    slide-number: true
+    chalkboard: 
+      buttons: true
+    preview-links: auto
+    scrollable: true
+    theme: serif
+    css: styles.css
+resources:
+  - demo.pdf
+editor_options: 
+  chunk_output_type: console
+knitr:
+  opts_chunk:
+    dev: png
+    dev.args:
+      bg: transparent
+---
+
+## Um pouco sobre mim...
+
+::: incremental
+
+- Bacharel em Estatística pela Universidade de Brasília — UnB (2025)
+
+- Gerente de projetos ESTAT (2023)
+
+- Estagiário NUADE — STF (2023-2025)
+
+- Mais informações no meu [site](https://penasta.github.io)
+
+- Contato: brunogtoledo96@gmail.com
+
+:::
+
+## Sobre as aulas
+
+:::incremental
+
+- O conteúdo aqui apresentado busca sintetizar o necessário para a avaliação teórica
+
+- Todo o conteúdo disponibilizado existe de forma acessível na internet
+
+- Portanto, o sucesso do aprendizado dependerá da nossa participação ativa, com minha capacidade de transmitir conhecimento de forma compreensível, e de dúvidas pertinentes para os tópicos que porventura sejam nebulosos.
+
+:::
+
+## Tipos de variáveis
+
+::: {style="font-size: 80%;"}
+
+Em estatística, costumamos classificar variáveis em 4 tipos:
+
+:::
+
+:::: columns
+
+::: {.column width="50%"}
+
+### Qualitativas (categóricas)
+
+::: {style="font-size: 80%;"}
+
+Que, por sua vez, podem ser:
+
+:::
+
+::: fragment
+
+#### Nominais (nome)
+
+::: {style="font-size: 80%;"}
+
+- Sem ordem natural entre as categorias
+
+Exemplos: sexo (M/F), espécie, cor de flor, nome de uma espécie.
+
+:::
+
+:::
+
+::: fragment
+
+#### Ordinais (ordem)
+
+::: {style="font-size: 80%;"}
+
+- Existe ordem, mas não há distância numérica clara
+
+Exemplos: estágio de desenvolvimento, escores de dor, nível de risco (baixo/médio/alto)
+
+:::
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+### Quantitativas (numéricas)
+
+::: {style="font-size: 80%;"}
+
+Que, por sua vez, podem ser:
+
+:::
+
+::: fragment
+
+#### Discretas
+
+::: {style="font-size: 80%;"}
+
+- Números inteiros, contagens
+
+Exemplos: número de sementes, número de indivíduos, número de pétalas
+
+:::
+
+:::
+
+::: fragment
+
+#### Contínuas
+
+::: {style="font-size: 80%;"}
+
+- Medidas reais; podem assumir qualquer valor em um intervalo
+
+Exemplos: peso, altura, comprimento de folha, taxa metabólica
+
+:::
+
+:::
+
+:::
+
+::::
+
+## Influência do tipo
+
+::: incremental
+
+- A identificação do tipo da variável é crucial para escolha do teste adequado em cada caso.
+
+- Para variáveis categóricas, podemos utilizar testes da família Qui-quadrado (independência, aderência, homogeneidade).
+
+- Para variáveis numéricas, utilizaremos técnicas mais robustas, como correlação, regressão, ANOVA, etc.
+
+:::
+
+## A distribuição Normal
+
+::: {style="font-size: 80%;"}
+
+Quando estamos analisando uma variável aproximadamente normal, podemos utilizar testes paramétricos, que são mais poderosos.
+
+::: fragment
+
+Características da distribuição Normal:
+
+::: incremental
+
+- Forma de sino;
+
+- Simétrica;
+
+- Média = Mediana;
+
+- Valores positivos E negativos.
+
+:::
+
+:::
+
+::: fragment
+
+Note: Se sua variável é normal, basta saber sua média e sua variância para informação completa da distribuição.
+
+:::incremental
+
+- A assimetria da normal é igual a zero, e sua curtose servirá de referência para as demais distribuições.
+
+- A normal é a distribuição **mesocúrtica**, usada como referência. Outras distribuições podem ser mais "pontudas" (leptocúrticas) ou mais "achatadas" (platicúrticas).
+
+:::
+
+:::
+
+::: fragment
+
+Note: Os testes **paramétricos** (em geral) são aqueles que possuem pressuposto de normalidade da(s) variável(is).
+
+:::
+
+::: fragment
+
+Os principais testes e técnicas que exigem normalidade são a correlação linear de Pearson, a ANOVA, a regressão e o teste t.
+
+:::
+
+:::
+
+## Distribuições não normais
+
+::: fragment
+
+Para casos em que nossa variável não seja quantitativa contínua, ou apresenta assimetria, ou muitos valores atípicos, dificilmente conseguiremos assumir sua normalidade.
+
+:::
+
+::: fragment
+
+Quando trabalhamos com contagens e frequências, não usamos distribuição Normal. Os testes apropriados (como o Qui-quadrado) utilizam uma estatística que segue a distribuição Qui-quadrado.
+
+:::
+
+::: fragment
+
+Por exemplo, quando estamos trabalhando com dados de contagem, não faz sentido utilizar a distribuição normal.
+
+Neste caso, utilizaremos testes próprios para frequência, derivados a partir da distribuição Qui-quadrado.
+
+Portanto, na situação em que temos variáveis categóricas, elas não poderão ser normais. Logo, iremos trabalhar com sua frequência; o que motiva o uso de testes baseado na distribuição Qui-quadrado.
+
+:::
+
+## Teste Qui-quadrado de independência
+
+::: fragment
+
+Utilizaremos este teste quando estivermos comparando duas variáveis categóricas
+
+Exemplo: Presença de parasita (sim/não) versus Sexo (M/F)
+
+```
+           | Parasita Sim | Parasita Não
+-----------|--------------|--------------
+Machos     |      12      |      8
+Fêmeas     |      5       |      15
+
+```
+
+
+:::
+
+::: fragment
+
+Característica da situação de utilização deste teste: Tabela NxM de frequências (em geral, 2x2 ou 3x3)
+
+:::
+
+::: fragment
+
+A pergunta deste teste será: existe associação entre as categorias? Ou elas são independentes?
+
+:::
+
+::: fragment
+
+Hipóteses deste teste:
+
+$H_0)$ Não há associação (portanto, independentes);
+
+$H_1)$ Existe associação entre as categorias testadas (dependência).
+
+:::
+
+## Teste Qui-quadrado de aderência
+
+::: {style="font-size: 90%;"}
+
+Utilizaremos este teste quando tivermos apenas 1 variável categórica. Iremos comparar sua frequência observada versus sua frequência esperada
+
+::: fragment
+
+A pergunta deste teste será: Os dados seguem o padrão esperado?
+
+O teste irá rejeitar a hipótese nula caso ao menos uma frequência diferir significativamente.
+
+Exemplo 1: Frequências mendelianas; verificar se os resultados de cruzamentos genéticos (as proporções fenotípicas ou genotípicas observadas) seguem as proporções teóricas previstas pelas Leis de Mendel;
+
+Exemplo 2: Proporção esperada (50% M / 50% F)
+
+```
+           | Qtd observada | Qtd esperada
+-----------|---------------|--------------
+Machos     |      17       |      15
+Fêmeas     |      13       |      15
+
+```
+
+:::
+
+::: fragment
+
+Hipóteses deste teste:
+
+$H_0)$ Distribuição observada segue a distribuição esperada;
+
+$H_1)$ Existe diferença significativa entre a distribuição observada e a distribuição esperada.
+
+:::
+
+:::
+
+## Por hoje é só!
+
+Dúvidas?
+
+Feedbacks?
